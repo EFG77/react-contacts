@@ -7,10 +7,10 @@ const Contacts = (props) => {
 
         <div>
           {""}  
-          {staff.map((item,index)=>{
+          {staff.map((item,id)=>{
                 return(
-                    <div key={index}>
-                        <Contact person={item}/>{""}
+                    <div key={item.id}>
+                        <Contact person={item} deleteContact={props.deleteContact} editContact={props.editContact}/>{""}
                     </div>
                 )
             })

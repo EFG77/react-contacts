@@ -12,21 +12,25 @@ class App extends Component{
       { name: 'Mike',
       phoneNumber: 1345764247,  
       location: 'Oslo',
+      id:'obfj88766',
     },
 
       { name: 'Alex',
       phoneNumber:  2345764247,   
       location: 'Accra',
+      id: 'ksdlf9887',
     },
 
       { name: 'Mia',
       phoneNumber: 3345764247,
       location: 'Berlin',
+      id: 'jdbe9374',
     },
       
       { name: 'Sarah',
       phoneNumber: 3342162137,
       location: 'Kumasi',
+      id: 'diad8362',
     },
 
     
@@ -37,12 +41,30 @@ class App extends Component{
   }; 
 
  handleAddContact=(newPerson)=> {
-
+ newPerson.id= Math.random().toString()
   this.setState({
     contacts:[...this.state.contacts,newPerson]
   })
 
   };
+
+  deleteContact= (id) =>{
+    let unDeletedContacts=this.state.contacts.filter(person=>person.id!==id)
+    this.setState({
+      contacts: unDeletedContacts
+    })
+
+
+
+  }
+
+  editContact= (id, replacementData) =>{
+    
+    this.setState({
+
+      contacts:this.state.contacts.map(contact=>contact.id===id ? replacementData : contact)
+    })
+  }
 
 
 
@@ -52,7 +74,7 @@ class App extends Component{
     <Row>
     <Col><ContactsForm addContact={this.handleAddContact}/></Col>
     <Col>
-     <Contacts people={this.state.contacts}/>
+     <Contacts people={this.state.contacts}deleteContact={this.deleteContact} editContact={this.editContact}/>
     </Col>
     </Row>
     </Container> 
@@ -62,6 +84,6 @@ class App extends Component{
   };
 }
 
-export default App
+export default App;
 
 

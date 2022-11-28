@@ -1,7 +1,22 @@
-import React from 'react';
-import {Card,Button} from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Card,Button,Modal} from 'react-bootstrap';
+import EditContactsForm from './EditContactsForm';
 
 const Contact = (props) => {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+  const handleDeleteContact= (e) => {
+     e.preventDefault();
+     
+     props.deleteContact(props.person.id); 
+  };
+
+
   let member=props.person; 
     return (
         <div>
@@ -19,11 +34,33 @@ const Contact = (props) => {
         <Card.Subtitle className="mb-2 text-muted">
            {member.location}
          </Card.Subtitle>
-        <Card.Link href="#">Card Link</Card.Link>
+        <Button variant="danger" size="sm" onClick={handleShow}>Edit</Button>
         {' '}
-        <Button variant="danger">Danger</Button>{' '}
+        <Button variant="danger" size="sm" onClick={handleDeleteContact}>Delete</Button>{' '}
       </Card.Body>
-    </Card>    
+    </Card>  
+
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>EditForm</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <EditContactsForm contact={props.person}editContact={props.editContact}/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+
+
         </div>
     );
 }

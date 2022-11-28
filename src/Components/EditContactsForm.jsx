@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
-import { Card, Form,Button } from 'react-bootstrap';
+import { Card, Form,Button,  } from 'react-bootstrap';
 import {v4 as uuidv4} from 'uuid';
 
-const ContactsForm = (props) => {
-    const [name,setName]= useState(' ');
-    const [phoneNumber,setphoneNumber]= useState(0);
-    const [location,setlocation]= useState(' ');
+const EditContactsForm = (props) => {
+    const [name,setName]= useState(props.contact.name);
+    const [phoneNumber,setphoneNumber]= useState(props.contact.phoneNumber);
+    const [location,setlocation]= useState(props.contact.location);
     
-
-    const handleSubmit= (e) =>{
+     const handleSubmit= (e) =>{
         e.preventDefault();
     
     let newPerson= {
@@ -17,8 +16,8 @@ const ContactsForm = (props) => {
         location:location,
         id:uuidv4(),
     }
-
-    props.addContact(newPerson);
+    
+    props.editContact(props.contact.id,newPerson);
     
     setName('')
     setphoneNumber(0)
@@ -47,8 +46,10 @@ const ContactsForm = (props) => {
       </Button>
     </Form>
           </Card>  
+          
         </div>
     );
 }
 
-export default ContactsForm;
+export default EditContactsForm;
+
