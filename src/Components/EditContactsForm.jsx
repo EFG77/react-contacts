@@ -8,6 +8,7 @@ const EditContactsForm = (props) => {
     const [location,setlocation]= useState(props.contact.location);
     
      const handleSubmit= (e) =>{
+      console.log('Logging Stuff', e)
         e.preventDefault();
     
     let newPerson= {
@@ -28,6 +29,7 @@ const EditContactsForm = (props) => {
     return (
         <div>
           <Card>
+
           <Form  onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label>Name</Form.Label>
